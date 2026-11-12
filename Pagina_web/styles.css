@@ -1,0 +1,209 @@
+/* -------- ESTILOS GENERALES -------- */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: montserrat, Arial, sans-serif;
+    background-color: #1e2030;
+
+}
+
+/* -------- HEADER -------- */
+
+.header {
+    background: linear-gradient(110deg, #101318, #1e2030);
+    padding: 0 1.5rem;
+}
+
+/* -------- NAVEGACIÓN -------- */
+
+.header__nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 80rem;
+    margin: auto;
+    position: relative;
+}
+
+.header__nav::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0.125rem;
+    background: linear-gradient(90deg, #ff79bd, #758bff, #56e6d3, #ff79bd);
+    background-size: 300% 100%;
+    animation: neon 7s ease-in-out infinite alternate;
+}
+
+/* -------- LISTAS -------- */
+
+.header__list {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* -------- ENLACES -------- */
+
+.header__link {
+    display: block;
+    color: #c5c8d0;
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 1rem 0;
+}
+
+.header__link:hover {
+    color: #fff;
+}
+
+/* -------- BUSCADOR -------- */
+
+.header__search {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    color: #c5c8d0;
+    cursor: pointer;
+    padding: 0;
+}
+
+.header__search span {
+    font-size: 1.25rem;
+}
+
+.header__search:hover {
+    color: #fff;
+}
+
+
+/* -------- MENÚ PRINCIPAL -------- */
+
+.header__main-nav {
+    display: flex;
+    align-items: center;
+    max-width: 80rem;
+    margin: auto;
+    padding: 1.25rem 0;
+    gap: 2rem;
+}
+
+/* -------- LOGOTIPO -------- */
+
+.header__logo-link {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.header__logo {
+    width: 12rem;
+    height: auto;
+    display: block;
+}
+
+/* -------- ENLACES PRINCIPALES -------- */
+
+.header__main-list {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.header__main-link {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.header__main-link span {
+    font-size: 1.25rem;
+}
+
+.header__main-link:hover {
+    color: #f0b36b;
+}
+
+/* -------- BOTONES DE ACCION -------- */
+
+.header__actions {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-left: auto;
+}
+
+.header__start {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #f0b36b;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.header__start span {
+    font-size: 1.25rem;
+}
+
+.header__start:hover {
+    color: #fff;
+}
+
+.header__contact {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 700;
+    white-space: nowrap;
+    background: linear-gradient(110deg, #665044, #40335e);
+    border: 0.125rem solid #a68ad0;
+    border-radius: 0.5rem;
+}
+
+.header__contact span {
+    font-size: 1.25rem;
+}
+
+.header__contact:hover {
+    background: linear-gradient(110deg, #846047, #57417c);
+}
+
+
+/* -------- AIMACIONES -------- */
+
+@keyframes neon {
+    from {
+        background-position: 0% 50%;
+    }
+
+    to {
+        background-position: 100% 50%;
+    }
+}
