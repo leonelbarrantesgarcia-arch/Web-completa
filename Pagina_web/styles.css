@@ -6,16 +6,19 @@
 
 body {
     margin: 0;
-    font-family: montserrat, Arial, sans-serif;
-    background-color: #1e2030;
-
+    font-family: "Lexend", sans-serif;
+    background-color: #161c24;
+    -webkit-font-smoothing: antialiased;
 }
 
 /* -------- HEADER -------- */
 
+.header .material-symbols-outlined {
+    font-variation-settings: 'FILL' 1, 'wght' 400, 'opsz' 20;
+}
+
 .header {
-    background: linear-gradient(110deg, #101318, #1e2030);
-    padding: 0 1.5rem;
+    background: transparent;
 }
 
 /* -------- NAVEGACIÓN -------- */
@@ -24,8 +27,10 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    min-height: 3rem;
     max-width: 80rem;
     margin: auto;
+    padding: 0.375rem 0.75rem;
     position: relative;
 }
 
@@ -35,10 +40,11 @@ body {
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 0.125rem;
-    background: linear-gradient(90deg, #ff79bd, #758bff, #56e6d3, #ff79bd);
-    background-size: 300% 100%;
-    animation: neon 7s ease-in-out infinite alternate;
+    height: 2px;
+    border-bottom: 1px solid #454f5b;
+    background: linear-gradient(-45deg, #685bc7, #2ad2c9, #685bc7, #ffb25b);
+    background-size: 300% 300%;
+    animation: gradient 20s ease 0.5s infinite;
 }
 
 /* -------- LISTAS -------- */
@@ -46,7 +52,7 @@ body {
 .header__list {
     display: flex;
     align-items: center;
-    gap: 2rem;
+    gap: 0.375rem;
     list-style: none;
     margin: 0;
     padding: 0;
@@ -55,12 +61,17 @@ body {
 /* -------- ENLACES -------- */
 
 .header__link {
-    display: block;
-    color: #c5c8d0;
+    display: flex;
+    align-items: center;
+    padding: 0.375rem 0.75rem;
+    border-radius: 0.5rem;
+    color: #c4cdd5;
     text-decoration: none;
-    font-size: 0.8rem;
-    font-weight: 600;
-    padding: 1rem 0;
+    font-size: 0.75rem;
+    font-weight: 700;
+    line-height: 1.5;
+    white-space: nowrap;
+    transition: all 0.3s ease;
 }
 
 .header__link:hover {
@@ -73,15 +84,23 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: none;
+    padding: 0.375rem 0.75rem;
     border: none;
-    color: #c5c8d0;
+    border-radius: 0.5rem;
+    background: none;
+    color: #c4cdd5;
     cursor: pointer;
-    padding: 0;
+    transition: all 0.3s ease;
 }
 
 .header__search span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.125rem;
+    height: 1.5rem;
     font-size: 1.25rem;
+    line-height: 1.5rem;
 }
 
 .header__search:hover {
@@ -95,9 +114,9 @@ body {
     display: flex;
     align-items: center;
     max-width: 80rem;
-    margin: auto;
-    padding: 1.25rem 0;
-    gap: 2rem;
+    margin: 0.875rem auto 0;
+    padding: 0.75rem;
+    gap: 1.5rem;
 }
 
 /* -------- LOGOTIPO -------- */
@@ -106,10 +125,11 @@ body {
     display: flex;
     align-items: center;
     flex-shrink: 0;
+    margin-bottom: 3px;
 }
 
 .header__logo {
-    width: 12rem;
+    width: 12.5rem;
     height: auto;
     display: block;
 }
@@ -119,7 +139,7 @@ body {
 .header__main-list {
     display: flex;
     align-items: center;
-    gap: 2rem;
+    gap: 0.375rem;
     list-style: none;
     margin: 0;
     padding: 0;
@@ -128,16 +148,27 @@ body {
 .header__main-link {
     display: flex;
     align-items: center;
-    gap: 0.25rem;
+    gap: 0.3125rem;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
     color: #fff;
     text-decoration: none;
-    font-size: 0.9rem;
+    font-size: 1rem;
     font-weight: 700;
+    line-height: 1;
     white-space: nowrap;
+    transition: all 0.3s ease;
 }
 
 .header__main-link span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1rem;
+    height: 1rem;
+    margin-left: 0.3125rem;
     font-size: 1.25rem;
+    line-height: 1;
 }
 
 .header__main-link:hover {
@@ -157,15 +188,23 @@ body {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    color: #f0b36b;
+    padding: 0.75rem 0;
+    color: #ffb25b;
     text-decoration: none;
-    font-size: 0.9rem;
+    font-size: 1rem;
     font-weight: 700;
+    line-height: 1;
     white-space: nowrap;
 }
 
-.header__start span {
-    font-size: 1.25rem;
+.header__start span,
+.header__contact span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1rem;
+    height: 1rem;
+    font-size: 1.125rem;
 }
 
 .header__start:hover {
@@ -176,34 +215,36 @@ body {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    padding: 0.75rem 1rem;
+    padding: 12px 20px;
     color: #fff;
     text-decoration: none;
-    font-size: 0.9rem;
+    font-size: 1rem;
     font-weight: 700;
+    line-height: 1;
     white-space: nowrap;
-    background: linear-gradient(110deg, #665044, #40335e);
-    border: 0.125rem solid #a68ad0;
-    border-radius: 0.5rem;
+    border: 3px solid transparent;
+    border-radius: 8px;
+    background:
+        linear-gradient(150deg, rgb(128, 89, 46), rgb(52, 46, 100)) padding-box,
+        linear-gradient(150deg, rgb(255, 178, 91), rgb(104, 91, 199)) border-box;
+    box-shadow:
+        inset -0.5px -0.5px 0 0 rgba(210, 206, 238, 0.5),
+        inset 1px 1px 0 0 rgba(171, 119, 61, 0.25);
+    transition: all 0.5s ease;
 }
 
-.header__contact span {
-    font-size: 1.25rem;
-}
+/* -------- ANIMACIONES -------- */
 
-.header__contact:hover {
-    background: linear-gradient(110deg, #846047, #57417c);
-}
-
-
-/* -------- AIMACIONES -------- */
-
-@keyframes neon {
-    from {
+@keyframes gradient {
+    0% {
         background-position: 0% 50%;
     }
 
-    to {
+    50% {
         background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
     }
 }
