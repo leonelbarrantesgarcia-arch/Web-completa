@@ -5,8 +5,17 @@ const originals = [...track.children];
 const total = originals.length;
 
 const DELAY = 10000;
+const THRESHOLD = 20;
+
 let index = 1;
 let timer;
+let autoplayEnabled = true;
+let isMoving = false;
+let isDragging = false;
+let startX = 0;
+let startOffset = 0;
+let moved = 0;
+let dragPercent = 0;
 
 // Numera cada título para poder reconocer a sus copias
 originals.forEach((slide, i) => {
@@ -26,8 +35,9 @@ function currentSlide() {
   return (index - 1 + total) % total;
 }
 
-function setPosition() {
-  track.style.transform = `translateX(${-index * 100}%)`;
+// offset: desplazamiento extra (en %) mientras se arrastra
+function setPosition(offset = 0) {
+  track.style.transform = `translateX(${-index * 100 + offset}%)`;
 }
 
 function activate() {
@@ -55,6 +65,7 @@ function jumpTo(newIndex) {
 
 // Movimiento con animación
 function goTo(newIndex) {
+  isMoving = true;
   index = newIndex;
   setPosition();
   activate();
@@ -62,6 +73,7 @@ function goTo(newIndex) {
 
 function scheduleNext() {
   clearTimeout(timer);
+  if (!autoplayEnabled) return;
   timer = setTimeout(() => goTo(index + 1), DELAY);
 }
 
@@ -70,8 +82,89 @@ track.addEventListener("transitionend", (event) => {
   if (index === 0) jumpTo(total);
   if (index === total + 1) jumpTo(1);
   deactivateOthers();
+  isMoving = false;
   scheduleNext();
 });
+
+// ---------- Arrastre con el mouse ----------
+
+viewport.addEventListener("pointerdown", (event) => {
+  if (event.button !== 0) return;
+
+  isDragging = true;
+  startX = event.clientX;
+  startOffset = 0;
+  moved = 0;
+  clearTimeout(timer);
+  viewport.setPointerCapture(event.pointerId);
+
+  // Se agarra el carrusel en pleno movimiento: se congela donde va
+  if (isMoving) {
+    const width = viewport.getBoundingClientRect().width;
+    const currentX = new DOMMatrixReadOnly(getComputedStyle(track).transform)
+      .m41;
+    const currentPercent = (currentX / width) * 100;
+    const nearest = Math.round(-currentPercent / 100);
+
+    startOffset = currentPercent + nearest * 100;
+    index = nearest;
+    if (index === 0) index = total;
+    if (index === total + 1) index = 1;
+
+    isMoving = false;
+    track.classList.add("is-dragging");
+    setPosition(startOffset);
+  }
+
+  dragPercent = startOffset;
+});
+
+viewport.addEventListener("pointermove", (event) => {
+  if (!isDragging) return;
+  const width = viewport.getBoundingClientRect().width;
+  moved = ((event.clientX - startX) / width) * 100;
+  if (moved !== 0) {
+    track.classList.add("is-dragging");
+  }
+  dragPercent = startOffset + moved;
+  setPosition(dragPercent);
+});
+
+function endDrag() {
+  if (!isDragging) return;
+  isDragging = false;
+  track.classList.remove("is-dragging");
+
+  // Solo fue un clic sobre el carrusel quieto: se reanuda el autoplay
+  if (moved === 0 && startOffset === 0) {
+    scheduleNext();
+    return;
+  }
+
+  // Posición actual medida en "títulos" (por ejemplo, 2.25)
+  const position = index - dragPercent / 100;
+  const ratio = THRESHOLD / 100;
+  let target;
+
+  if (moved < 0) {
+    target =
+      position - Math.floor(position) >= ratio
+        ? Math.ceil(position)
+        : Math.floor(position);
+  } else if (moved > 0) {
+    target =
+      Math.ceil(position) - position >= ratio
+        ? Math.floor(position)
+        : Math.ceil(position);
+  } else {
+    target = Math.round(position);
+  }
+
+  goTo(Math.max(0, Math.min(total + 1, target)));
+}
+
+viewport.addEventListener("pointerup", endDrag);
+viewport.addEventListener("pointercancel", endDrag);
 
 jumpTo(1);
 activate();

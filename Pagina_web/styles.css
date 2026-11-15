@@ -272,6 +272,7 @@ body {
     transition: transform 1.5s ease;
 }
 
+.hero__track.is-dragging,
 .hero__track.is-jumping {
     transition: none;
 }
