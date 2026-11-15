@@ -256,11 +256,13 @@ body {
     text-wrap: balance;
 }
 
-.hero__highlight {
-    background: linear-gradient(90deg, #3fa9e0, #685bc7);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+.hero__title:not(:first-child) {
+    display: none;
+}
+
+.hero__slides {
+    display: grid;
+    justify-items: center;
 }
 
 .hero__text {
@@ -271,6 +273,27 @@ body {
     font-weight: 500;
     line-height: 1.5;
     text-align: center;
+}
+
+.hero__gradient {
+    background: linear-gradient(-30deg, #685bc7, #2ad2c9, #685bc7, #2ad2c9);
+    background-size: 400% 400%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: #fff;
+    animation: gradient 10s ease 0.25s infinite;
+}
+
+.hero__underline {
+    position: relative;
+    display: inline-block;
+    padding-bottom: 0.125rem;
+    background-image: linear-gradient(to right, #ffb25b, #ffb25b);
+    background-repeat: no-repeat;
+    background-position: 0% 100%;
+    background-size: 0% 0.375rem;
+    animation: underline 2s ease-in-out 1.5s forwards;
 }
 
 /* -------- ANIMACIONES -------- */
@@ -286,5 +309,15 @@ body {
 
     100% {
         background-position: 0% 50%;
+    }
+}
+
+@keyframes underline {
+    0% {
+        background-size: 0% 0.375rem;
+    }
+
+    100% {
+        background-size: 100% 0.375rem;
     }
 }
