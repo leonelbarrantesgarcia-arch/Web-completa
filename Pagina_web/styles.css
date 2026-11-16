@@ -412,6 +412,14 @@ body {
     pointer-events: none;
 }
 
+.featured__side {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 24.667rem;
+    flex-shrink: 0;
+}
+
 
 /* -------- TARJETA PRINCIPAL -------- */
 
@@ -457,6 +465,38 @@ body {
     border-radius: inherit;
     pointer-events: none;
 }
+
+.card--press {
+    width: 100%;
+    height: 13.875rem;
+    background-color: #24354a;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #263746, #171e2b);
+    padding: 1.5rem;
+}
+
+.card--press .card__title {
+    font-size: 1.414rem;
+    line-height: 1.75rem;
+    letter-spacing: -0.5px;
+}
+
+.card--press .card__content {
+    gap: 1rem;
+}
+
+.card--press .card__category {
+    color: #b3ade3;
+}
+
+
+.card--quantum {
+    width: 100%;
+    height: 12.796rem;
+    background-color: #373459;
+    border-radius: 12px;
+}
+
 
 /* -------- ETIQUETA DESTACADA -------- */
 
