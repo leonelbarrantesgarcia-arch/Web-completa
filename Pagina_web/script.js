@@ -169,3 +169,9 @@ viewport.addEventListener("pointercancel", endDrag);
 jumpTo(1);
 activate();
 scheduleNext();
+
+document.addEventListener("DOMContentLoaded", () => {
+  if (window.UnicornStudio) {
+    UnicornStudio.init();
+  }
+});
