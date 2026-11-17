@@ -40,10 +40,11 @@ body {
     content: "";
     position: absolute;
     bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    border-bottom: 1px solid #454f5b;
+    left: 0.75rem;
+    width: calc(100% - 1.5rem);
+    height: 0.125rem;
+    box-sizing: border-box;
+    border-bottom: 0.0625rem solid #454f5b;
     background: linear-gradient(-45deg, #685bc7, #2ad2c9, #685bc7, #ffb25b);
     background-size: 300% 300%;
     animation: gradient 20s ease 0.5s infinite;
@@ -58,6 +59,12 @@ body {
     list-style: none;
     margin: 0;
     padding: 0;
+}
+
+/* -------- GRUPO IZQUIERDO DEL HEADER -------- */
+
+.header__list:first-child {
+    margin-left: 0.75rem;
 }
 
 /* -------- ENLACES -------- */
@@ -256,7 +263,6 @@ body {
         linear-gradient(rgba(22, 28, 36, 0.67) 33%,
             rgb(22, 28, 36) 90%),
         url("https://www.zerotier.com/wp-content/uploads/2026/04/Home-Hero-BG.jpg");
-
     background-size: cover;
     background-position: 50% 0%;
     background-repeat: no-repeat;
@@ -269,10 +275,10 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1.5rem;
+    gap: 1.625rem;
     max-width: 80rem;
     margin: 0 auto;
-    padding: 3rem 0.75rem 16.502rem;
+    padding: 4.625rem 0.75rem 15.002rem;
 }
 
 .hero__title {
@@ -319,6 +325,7 @@ body {
     font-weight: 500;
     line-height: 1.5;
     text-align: center;
+    text-wrap: balance;
 }
 
 .hero__gradient {
@@ -334,7 +341,7 @@ body {
 .hero__underline {
     position: relative;
     display: inline-block;
-    padding-bottom: 0.125rem;
+    padding-bottom: 0;
     background-image: linear-gradient(to right, #ffb25b, #ffb25b);
     background-repeat: no-repeat;
     background-position: 0% 100%;
@@ -508,6 +515,13 @@ body {
     z-index: 1;
 }
 
+/* -------- ETIQUETA FEATURED BLOG -------- */
+
+.card--blog .card__tag {
+    top: 0.6875rem;
+    right: 0.6875rem;
+}
+
 /* -------- DEGRADADO ORIGINAL -------- */
 
 
@@ -549,9 +563,9 @@ body {
 .card--press .card__content {
     position: absolute;
     top: 3.637rem;
-    left: 1.563rem;
-    width: calc(100% - 3.125rem);
-    gap: 0;
+    left: 1.5rem;
+    width: calc(100% - 3rem);
+    gap: 0.5rem;
 }
 
 .card--press .card__title {
@@ -566,8 +580,8 @@ body {
 }
 
 .card--press .card__tag {
-    top: 0.75rem;
-    right: 0.75rem;
+    top: 0.6875rem;
+    right: 0.6875rem;
     backdrop-filter: blur(0.25rem);
 }
 
@@ -576,6 +590,7 @@ body {
     top: 7.176rem;
     left: 0;
     margin: 0;
+    line-height: 1rem;
 }
 
 /* -------- TARJETA QUANTUM -------- */
@@ -683,6 +698,18 @@ body {
     z-index: 1;
 }
 
+/* -------- ENCABEZADO TARJETA BLOG -------- */
+
+.card--blog .card__heading-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.card--blog .card__heading-group .card__category {
+    margin: 0;
+}
+
 /* Categoría */
 
 .card__category {
@@ -720,7 +747,7 @@ body {
 /* Descripción */
 
 .card__text {
-    margin: 0;
+    margin: 0 0 0.75rem;
     color: #f4f6f8;
     font-size: 1rem;
     font-weight: 400;
