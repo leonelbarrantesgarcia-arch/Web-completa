@@ -738,6 +738,20 @@ body {
     line-height: 1rem;
     text-decoration: none;
     white-space: nowrap;
+    transition: all 0.5s ease;
+}
+
+/* -------- INTERACCIÓN BOTÓN QUANTUM -------- */
+
+.quantum__button:hover {
+    transform: translateY(-0.0625rem);
+}
+
+/* -------- RESPLANDOR HOVER BOTÓN QUANTUM -------- */
+
+.quantum__button:hover::before,
+.quantum__button:hover::after {
+    inset: -0.05rem 0 -0.3rem;
 }
 
 .quantum__button::before,
@@ -748,6 +762,7 @@ body {
     z-index: -1;
     border-radius: inherit;
     pointer-events: none;
+    transition: all 0.5s ease;
 }
 
 .quantum__button::before {
