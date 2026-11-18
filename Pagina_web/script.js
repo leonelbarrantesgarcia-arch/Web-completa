@@ -175,3 +175,46 @@ document.addEventListener("DOMContentLoaded", () => {
     UnicornStudio.init();
   }
 });
+
+/* -------- NAVBAR FIJO AL HACER SCROLL -------- */
+
+document.addEventListener("DOMContentLoaded", () => {
+  const navbar = document.querySelector(".header__main-nav");
+
+  if (!navbar) return;
+
+  // Conserva el espacio del navbar cuando pasa a fixed.
+  const espacio = document.createElement("div");
+  navbar.after(espacio);
+
+  const fuenteBase = parseFloat(
+    getComputedStyle(document.documentElement).fontSize,
+  );
+
+  let alturaOriginal = navbar.getBoundingClientRect().height;
+  let posicionOriginal = navbar.getBoundingClientRect().top + scrollY;
+
+  function actualizarNavbar() {
+    const fijar = scrollY >= posicionOriginal;
+
+    navbar.classList.toggle("is-fixed", fijar);
+
+    espacio.style.height = fijar ? `${alturaOriginal / fuenteBase}rem` : "0";
+  }
+
+  window.addEventListener("scroll", actualizarNavbar, {
+    passive: true,
+  });
+
+  window.addEventListener("resize", () => {
+    navbar.classList.remove("is-fixed");
+    espacio.style.height = "0";
+
+    alturaOriginal = navbar.getBoundingClientRect().height;
+    posicionOriginal = navbar.getBoundingClientRect().top + scrollY;
+
+    actualizarNavbar();
+  });
+
+  actualizarNavbar();
+});
