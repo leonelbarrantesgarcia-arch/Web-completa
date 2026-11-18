@@ -269,8 +269,10 @@ body {
 .hero {
     position: relative;
     isolation: isolate;
+    z-index: 0;
 }
 
+/* -------- IMAGEN DE FONDO DEL HERO -------- */
 .hero::before {
     content: "";
     position: absolute;
@@ -278,17 +280,28 @@ body {
     left: 0;
     width: 100%;
     height: 64.479rem;
-    background-image:
-        linear-gradient(rgba(22, 28, 36, 0.67) 33%,
-            rgb(22, 28, 36) 90%),
-        url("https://www.zerotier.com/wp-content/uploads/2026/04/Home-Hero-BG.jpg");
+    background-image: url("https://www.zerotier.com/wp-content/uploads/2026/04/Home-Hero-BG.jpg");
     background-size: cover;
     background-position: 50% 0%;
     background-repeat: no-repeat;
-    z-index: -1;
+    transform: translateY(var(--hero-parallax, -3rem));
+    z-index: -2;
     pointer-events: none;
 }
 
+/* -------- DEGRADADO SOBRE LA IMAGEN -------- */
+.hero::after {
+    content: "";
+    position: absolute;
+    top: -8.558rem;
+    left: 0;
+    width: 100%;
+    height: calc(100% + 8.558rem);
+    background-image: linear-gradient(rgba(22, 28, 36, 0.67) 33%,
+            rgb(22, 28, 36) 90%);
+    z-index: -1;
+    pointer-events: none;
+}
 
 .hero__container {
     display: flex;
@@ -395,7 +408,24 @@ body {
             rgb(214, 217, 220) 9.875rem,
             rgb(230, 232, 234) 10.625rem,
             rgb(243, 245, 247) 12.5rem);
+    position: relative;
+    z-index: 1;
 }
+
+/* -------- FONDO SVG DE TRUSTED -------- */
+
+.featured::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("https://www.zerotier.com/wp-content/uploads/2026/05/Globe-Topology-260521v01-FINAL.svg");
+    background-size: 60% auto;
+    background-position: 45rem 15rem;
+    background-repeat: no-repeat;
+    z-index: 0;
+    pointer-events: none;
+}
+
 
 .featured__inner {
     position: relative;
@@ -415,6 +445,7 @@ body {
     border-radius: 1.5rem;
     background: linear-gradient(rgb(33, 43, 54) 0%,
             rgb(22, 28, 36) 100%);
+    box-shadow: 0 0.75rem 1.5rem 0 rgba(22, 28, 36, 0.5);
 }
 
 .featured__animation {
@@ -943,6 +974,20 @@ body {
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    animation: gradient 10s ease infinite;
+}
+
+
+/* -------- ANIMACIÓN DEL GLOBO -------- */
+
+.trusted {
+    position: relative;
+    z-index: 2;
+}
+
+.trusted__content {
+    position: relative;
+    z-index: 2;
 }
 
 /* -------- ANIMACIONES -------- */
@@ -981,4 +1026,10 @@ body {
             transparent 0%,
             #000 25%,
             #000 100%);
+}
+
+@media (max-width: 45rem) {
+    .trusted__title-break {
+        display: none;
+    }
 }
