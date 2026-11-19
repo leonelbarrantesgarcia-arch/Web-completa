@@ -175,3 +175,178 @@ document.addEventListener("DOMContentLoaded", () => {
     UnicornStudio.init();
   }
 });
+
+/* -------- NAVBAR FIJO AL HACER SCROLL -------- */
+
+document.addEventListener("DOMContentLoaded", () => {
+  const navbar = document.querySelector(".header__main-nav");
+
+  if (!navbar) return;
+
+  // Conserva el espacio del navbar cuando pasa a fixed.
+  const espacio = document.createElement("div");
+  navbar.after(espacio);
+
+  const fuenteBase = parseFloat(
+    getComputedStyle(document.documentElement).fontSize,
+  );
+
+  let alturaOriginal = navbar.getBoundingClientRect().height;
+  let posicionOriginal = navbar.getBoundingClientRect().top + scrollY;
+
+  function actualizarNavbar() {
+    const fijar = scrollY >= posicionOriginal;
+
+    navbar.classList.toggle("is-fixed", fijar);
+
+    espacio.style.height = fijar ? `${alturaOriginal / fuenteBase}rem` : "0";
+  }
+
+  window.addEventListener("scroll", actualizarNavbar, {
+    passive: true,
+  });
+
+  window.addEventListener("resize", () => {
+    navbar.classList.remove("is-fixed");
+    espacio.style.height = "0";
+
+    alturaOriginal = navbar.getBoundingClientRect().height;
+    posicionOriginal = navbar.getBoundingClientRect().top + scrollY;
+
+    actualizarNavbar();
+  });
+
+  actualizarNavbar();
+});
+
+/* -------- EFECTO PARALLAX DEL HERO -------- */
+
+const hero = document.querySelector(".hero");
+
+if (hero) {
+  // Mediciones reales obtenidas de ZeroTier
+  const muestras = [
+    { scroll: 0, desplazamiento: -48.0139 },
+    { scroll: 300, desplazamiento: -63.9006 },
+    { scroll: 600, desplazamiento: -81.5181 },
+    { scroll: 900, desplazamiento: -99.1783 },
+  ];
+
+  function calcularDesplazamiento(scroll) {
+    if (scroll <= 0) return muestras[0].desplazamiento;
+
+    for (let i = 1; i < muestras.length; i++) {
+      const anterior = muestras[i - 1];
+      const siguiente = muestras[i];
+
+      if (scroll <= siguiente.scroll) {
+        const progreso =
+          (scroll - anterior.scroll) / (siguiente.scroll - anterior.scroll);
+
+        return (
+          anterior.desplazamiento +
+          (siguiente.desplazamiento - anterior.desplazamiento) * progreso
+        );
+      }
+    }
+
+    return muestras[muestras.length - 1].desplazamiento;
+  }
+
+  let pendiente = false;
+
+  function actualizarFondo() {
+    const rem = parseFloat(getComputedStyle(document.documentElement).fontSize);
+
+    const desplazamiento = calcularDesplazamiento(scrollY);
+
+    hero.style.setProperty("--hero-parallax", `${desplazamiento / rem}rem`);
+
+    pendiente = false;
+  }
+
+  window.addEventListener(
+    "scroll",
+    () => {
+      if (pendiente) return;
+
+      pendiente = true;
+      requestAnimationFrame(actualizarFondo);
+    },
+    { passive: true },
+  );
+
+  actualizarFondo();
+}
+
+/* -------- LOGOS TRUSTED BY -------- */
+
+document.addEventListener("DOMContentLoaded", () => {
+  const tracks = document.querySelectorAll(".trusted__logos-track");
+
+  if (tracks.length !== 2) return;
+
+  const base = "https://www.zerotier.com/wp-content/uploads/2026/09/";
+
+  const logos = [
+    ["Thales", "Customer-Logo-Thales-260902v01-DRAFT.png"],
+    ["Microsoft", "Customer-Logo-Microsoft-260902v01-DRAFT.png"],
+    ["Volvo", "Customer-Logo-Volvo-260902v01-DRAFT.png"],
+    ["TD Synnex", "Customer-Logo-TD-SYNNEX-260902v01-DRAFT.png"],
+    ["Astrion", "Customer-Logo-Astrion-260902v01-DRAFT.png"],
+    ["Leidos", "Customer-Logo-Leidos-260902v01-DRAFT.png"],
+    ["Superbet", "Customer-Logo-Superbet-260902v01-DRAFT.png"],
+    ["MikroTik", "Customer-Logo-Mikrotik-260902v01-DRAFT.png"],
+    ["Advantech", "Customer-Logo-Advantech-260902v01-DRAFT.png"],
+    ["Keysight", "Customer-Logo-KEYSIGHT-260902v01-DRAFT.png"],
+    ["Metropolis", "Customer-Logo-Metropol-260902v01-DRAFT.png"],
+    ["Mateco", "Customer-Logo-Mateco-260902v01-DRAFT.png"],
+    ["Forest Rock", "Customer-Logo-ForestRock-260902v01-DRAFT.png"],
+    ["NTT Data", "Customer-Logo-NTT-Data-260902v01-DRAFT.png"],
+    ["EMCOR Group", "Customer-Logo-EMCOR-Group-260902v01-DRAFT.png"],
+    ["CEF", "Customer-Logo-CEF-260902v01-DRAFT.png"],
+    ["BTG Pactual", "Customer-Logo-BTG-Pactual-260902v01-DRAFT.png"],
+    ["Ahorramas", "Customer-Logo-AhorraMas-260902v01-DRAFT.png"],
+    ["Mediapro", "Customer-Logo-Mediapro-260902v01-DRAFT.png"],
+    ["Wilson Group", "Customer-Logo-Wilson-Group-260902v01-DRAFT.png"],
+    ["Teltonika", "Customer-Logo-TELTONIKA-260902v01-DRAFT.png"],
+    ["U.S. Army", "Customer-US-Army-260925v01-DRAFT.png"],
+    ["U.S. Air Force", "Customer-US-Air-Force-260925v01-DRAFT.png"],
+    ["In-Q-Tel", "Customer-In-Q-Tel-260925v01-DRAFT.png"],
+    ["U.S. Navy", "Customer-US-Navy-260925v01-DRAFT.png"],
+    [
+      "U.S. Department of Homeland Security",
+      "Customer-Department-of-Homeland-Security-260925v01-DRAFT.png",
+    ],
+  ];
+
+  // Separamos los logos en dos filas
+  const grupos = [logos.slice(0, 21), logos.slice(21)];
+
+  tracks.forEach((track, indice) => {
+    const fragmento = document.createDocumentFragment();
+
+    // Repetimos los logos 4 veces para el carrusel
+    for (let copia = 0; copia < 4; copia++) {
+      grupos[indice].forEach(([nombre, archivo]) => {
+        const holder = document.createElement("div");
+        holder.className = "trusted__logo-holder";
+
+        const img = document.createElement("img");
+        img.className = "trusted__logo";
+        img.src = base + archivo;
+        img.alt = copia === 0 ? nombre : "";
+        img.decoding = "async";
+
+        if (copia > 0) {
+          holder.setAttribute("aria-hidden", "true");
+        }
+
+        holder.appendChild(img);
+        fragmento.appendChild(holder);
+      });
+    }
+
+    track.replaceChildren(fragmento);
+  });
+});
