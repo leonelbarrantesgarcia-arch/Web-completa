@@ -278,3 +278,75 @@ if (hero) {
 
   actualizarFondo();
 }
+
+/* -------- LOGOS TRUSTED BY -------- */
+
+document.addEventListener("DOMContentLoaded", () => {
+  const tracks = document.querySelectorAll(".trusted__logos-track");
+
+  if (tracks.length !== 2) return;
+
+  const base = "https://www.zerotier.com/wp-content/uploads/2026/09/";
+
+  const logos = [
+    ["Thales", "Customer-Logo-Thales-260902v01-DRAFT.png"],
+    ["Microsoft", "Customer-Logo-Microsoft-260902v01-DRAFT.png"],
+    ["Volvo", "Customer-Logo-Volvo-260902v01-DRAFT.png"],
+    ["TD Synnex", "Customer-Logo-TD-SYNNEX-260902v01-DRAFT.png"],
+    ["Astrion", "Customer-Logo-Astrion-260902v01-DRAFT.png"],
+    ["Leidos", "Customer-Logo-Leidos-260902v01-DRAFT.png"],
+    ["Superbet", "Customer-Logo-Superbet-260902v01-DRAFT.png"],
+    ["MikroTik", "Customer-Logo-Mikrotik-260902v01-DRAFT.png"],
+    ["Advantech", "Customer-Logo-Advantech-260902v01-DRAFT.png"],
+    ["Keysight", "Customer-Logo-KEYSIGHT-260902v01-DRAFT.png"],
+    ["Metropolis", "Customer-Logo-Metropol-260902v01-DRAFT.png"],
+    ["Mateco", "Customer-Logo-Mateco-260902v01-DRAFT.png"],
+    ["Forest Rock", "Customer-Logo-ForestRock-260902v01-DRAFT.png"],
+    ["NTT Data", "Customer-Logo-NTT-Data-260902v01-DRAFT.png"],
+    ["EMCOR Group", "Customer-Logo-EMCOR-Group-260902v01-DRAFT.png"],
+    ["CEF", "Customer-Logo-CEF-260902v01-DRAFT.png"],
+    ["BTG Pactual", "Customer-Logo-BTG-Pactual-260902v01-DRAFT.png"],
+    ["Ahorramas", "Customer-Logo-AhorraMas-260902v01-DRAFT.png"],
+    ["Mediapro", "Customer-Logo-Mediapro-260902v01-DRAFT.png"],
+    ["Wilson Group", "Customer-Logo-Wilson-Group-260902v01-DRAFT.png"],
+    ["Teltonika", "Customer-Logo-TELTONIKA-260902v01-DRAFT.png"],
+    ["U.S. Army", "Customer-US-Army-260925v01-DRAFT.png"],
+    ["U.S. Air Force", "Customer-US-Air-Force-260925v01-DRAFT.png"],
+    ["In-Q-Tel", "Customer-In-Q-Tel-260925v01-DRAFT.png"],
+    ["U.S. Navy", "Customer-US-Navy-260925v01-DRAFT.png"],
+    [
+      "U.S. Department of Homeland Security",
+      "Customer-Department-of-Homeland-Security-260925v01-DRAFT.png",
+    ],
+  ];
+
+  // Separamos los logos en dos filas
+  const grupos = [logos.slice(0, 21), logos.slice(21)];
+
+  tracks.forEach((track, indice) => {
+    const fragmento = document.createDocumentFragment();
+
+    // Repetimos los logos 4 veces para el carrusel
+    for (let copia = 0; copia < 4; copia++) {
+      grupos[indice].forEach(([nombre, archivo]) => {
+        const holder = document.createElement("div");
+        holder.className = "trusted__logo-holder";
+
+        const img = document.createElement("img");
+        img.className = "trusted__logo";
+        img.src = base + archivo;
+        img.alt = copia === 0 ? nombre : "";
+        img.decoding = "async";
+
+        if (copia > 0) {
+          holder.setAttribute("aria-hidden", "true");
+        }
+
+        holder.appendChild(img);
+        fragmento.appendChild(holder);
+      });
+    }
+
+    track.replaceChildren(fragmento);
+  });
+});
