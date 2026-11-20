@@ -356,35 +356,87 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener("DOMContentLoaded", () => {
   const botonAbrir = document.querySelector(".header__menu-button");
   const menu = document.querySelector(".mobile-menu");
+  const panel = document.querySelector(".mobile-menu__panel");
   const botonCerrar = document.querySelector(".mobile-menu__close");
   const fondoOscuro = document.querySelector(".mobile-menu__overlay");
 
-  if (!botonAbrir || !menu || !botonCerrar || !fondoOscuro) return;
+  if (!botonAbrir || !menu || !panel || !botonCerrar || !fondoOscuro) {
+    return;
+  }
 
-  // Abrir menú
+  const reducirMovimiento = window.matchMedia(
+    "(prefers-reduced-motion: reduce)",
+  );
+
+  let estado = "cerrado";
+
   function abrirMenu() {
+    if (estado !== "cerrado") return;
+
+    estado = "abriendo";
     menu.hidden = false;
+
+    // Preparar la animación de apertura
+    void menu.offsetWidth;
+
+    menu.classList.add("is-open");
     botonAbrir.setAttribute("aria-expanded", "true");
     botonCerrar.focus();
+
+    if (reducirMovimiento.matches) {
+      estado = "abierto";
+    }
   }
 
-  // Cerrar menú
   function cerrarMenu() {
-    menu.hidden = true;
+    if (estado === "cerrado" || estado === "cerrando") return;
+
+    estado = "cerrando";
+
+    // Activar la animación en reversa
+    menu.classList.remove("is-open");
+    menu.classList.add("is-closing");
+
     botonAbrir.setAttribute("aria-expanded", "false");
     botonAbrir.focus();
+
+    if (reducirMovimiento.matches) {
+      finalizarCierre();
+    }
   }
 
-  // Abrir con el botón hamburguesa
+  function finalizarCierre() {
+    menu.hidden = true;
+    menu.classList.remove("is-closing");
+    estado = "cerrado";
+  }
+
+  // Detectar cuando termina la apertura
+  panel.addEventListener("animationend", (event) => {
+    if (
+      event.target === panel &&
+      event.animationName === "mobile-slide-in-right" &&
+      estado === "abriendo"
+    ) {
+      estado = "abierto";
+    }
+  });
+
+  // Detectar cuando termina el cierre
+  menu.addEventListener("animationend", (event) => {
+    if (
+      event.target === menu &&
+      event.animationName === "mobile-menu-close" &&
+      estado === "cerrando"
+    ) {
+      finalizarCierre();
+    }
+  });
+
   botonAbrir.addEventListener("click", abrirMenu);
-
-  // Cerrar con la X
   botonCerrar.addEventListener("click", cerrarMenu);
-
-  // Cerrar presionando el fondo oscuro
   fondoOscuro.addEventListener("click", cerrarMenu);
 
-  // Cerrar presionando Escape
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape" && !menu.hidden) {
       cerrarMenu();

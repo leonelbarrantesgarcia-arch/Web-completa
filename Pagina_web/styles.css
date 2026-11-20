@@ -1395,3 +1395,90 @@ body {
     min-height: 2.5rem;
     justify-content: center;
 }
+
+
+/* -------- ANIMACIÓN DEL MENÚ LATERAL -------- */
+
+/* Estado inicial del panel */
+.mobile-menu__panel {
+    transform: translate3d(100%, 0, 0);
+    pointer-events: none;
+}
+
+/* El contenido puede recibir clics */
+.mobile-menu__content {
+    pointer-events: auto;
+}
+
+/* El fondo permanece oscuro mientras el menú está abierto */
+.mobile-menu__overlay {
+    opacity: 1;
+}
+
+/* Apertura del menú */
+.mobile-menu.is-open .mobile-menu__panel {
+    transform: translate3d(0, 0, 0);
+    animation: mobile-slide-in-right 0.75s linear both;
+}
+
+/* Animación de cierre */
+.mobile-menu.is-closing .mobile-menu__panel {
+    animation: mobile-slide-out-right 0.75s linear both;
+}
+
+/* Ocultar el fondo al terminar el cierre */
+.mobile-menu.is-closing {
+    animation: mobile-menu-close 0.75s linear both;
+}
+
+/* Movimiento original de ZeroTier */
+@keyframes mobile-slide-in-right {
+    0% {
+        transform: translate3d(100%, 0, 0);
+        animation-timing-function: ease;
+    }
+
+    100% {
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+/* Fondo original durante el cierre */
+@keyframes mobile-menu-close {
+    0% {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    99.99% {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    100% {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+/* Accesibilidad */
+@media (prefers-reduced-motion: reduce) {
+
+    .mobile-menu.is-open .mobile-menu__panel,
+    .mobile-menu.is-closing .mobile-menu__panel,
+    .mobile-menu.is-closing {
+        animation: none;
+    }
+}
+
+/* Salida del menú hacia la derecha */
+@keyframes mobile-slide-out-right {
+    0% {
+        transform: translate3d(0, 0, 0);
+        animation-timing-function: cubic-bezier(0.75, 0, 0.75, 0.9);
+    }
+
+    100% {
+        transform: translate3d(100%, 0, 0);
+    }
+}
