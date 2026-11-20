@@ -350,3 +350,96 @@ document.addEventListener("DOMContentLoaded", () => {
     track.replaceChildren(fragmento);
   });
 });
+
+/* -------- MENÚ LATERAL MÓVIL -------- */
+
+document.addEventListener("DOMContentLoaded", () => {
+  const botonAbrir = document.querySelector(".header__menu-button");
+  const menu = document.querySelector(".mobile-menu");
+  const panel = document.querySelector(".mobile-menu__panel");
+  const botonCerrar = document.querySelector(".mobile-menu__close");
+  const fondoOscuro = document.querySelector(".mobile-menu__overlay");
+
+  if (!botonAbrir || !menu || !panel || !botonCerrar || !fondoOscuro) {
+    return;
+  }
+
+  const reducirMovimiento = window.matchMedia(
+    "(prefers-reduced-motion: reduce)",
+  );
+
+  let estado = "cerrado";
+
+  function abrirMenu() {
+    if (estado !== "cerrado") return;
+
+    estado = "abriendo";
+    menu.hidden = false;
+
+    // Preparar la animación de apertura
+    void menu.offsetWidth;
+
+    menu.classList.add("is-open");
+    botonAbrir.setAttribute("aria-expanded", "true");
+    botonCerrar.focus();
+
+    if (reducirMovimiento.matches) {
+      estado = "abierto";
+    }
+  }
+
+  function cerrarMenu() {
+    if (estado === "cerrado" || estado === "cerrando") return;
+
+    estado = "cerrando";
+
+    // Activar la animación en reversa
+    menu.classList.remove("is-open");
+    menu.classList.add("is-closing");
+
+    botonAbrir.setAttribute("aria-expanded", "false");
+    botonAbrir.focus();
+
+    if (reducirMovimiento.matches) {
+      finalizarCierre();
+    }
+  }
+
+  function finalizarCierre() {
+    menu.hidden = true;
+    menu.classList.remove("is-closing");
+    estado = "cerrado";
+  }
+
+  // Detectar cuando termina la apertura
+  panel.addEventListener("animationend", (event) => {
+    if (
+      event.target === panel &&
+      event.animationName === "mobile-slide-in-right" &&
+      estado === "abriendo"
+    ) {
+      estado = "abierto";
+    }
+  });
+
+  // Detectar cuando termina el cierre
+  menu.addEventListener("animationend", (event) => {
+    if (
+      event.target === menu &&
+      event.animationName === "mobile-menu-close" &&
+      estado === "cerrando"
+    ) {
+      finalizarCierre();
+    }
+  });
+
+  botonAbrir.addEventListener("click", abrirMenu);
+  botonCerrar.addEventListener("click", cerrarMenu);
+  fondoOscuro.addEventListener("click", cerrarMenu);
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && !menu.hidden) {
+      cerrarMenu();
+    }
+  });
+});
