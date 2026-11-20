@@ -15,9 +15,14 @@
         rel="stylesheet">
     <!-- Estilos principales -->
     <link rel="stylesheet" href="styles.css">
+
+    <!-- Estilos principales -->
+    <link rel="stylesheet" href="styles.css">
+    <!-- Scripts -->
+    <script src="script.js" defer></script>
+    <script
+        src="https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v2.1.6/dist/unicornStudio.umd.js"></script>
 </head>
-<script src="script.js" defer></script>
-<script src="https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v2.1.6/dist/unicornStudio.umd.js"></script>
 
 <body>
     <header class="header">
@@ -35,22 +40,35 @@
                 </li>
             </ul>
             <!-- Grupo derecho -->
+
             <ul class="header__list">
                 <li class="header__item">
                     <button class="header__search" type="button" aria-label="Buscar">
                         <span class="material-symbols-outlined">search</span>
                     </button>
                 </li>
-                <li class="header__item">
+
+                <li class="header__item header__item--mobile-docs">
+                    <a href="#" class="header__link">Docs</a>
+                </li>
+
+                <li class="header__item header__item--mobile-support">
+                    <a href="#" class="header__link">Support</a>
+                </li>
+
+                <li class="header__item header__item--desktop-only">
                     <a href="#" class="header__link">Public Sector</a>
                 </li>
-                <li class="header__item">
+
+                <li class="header__item header__item--desktop-only">
                     <a href="#" class="header__link">Company</a>
                 </li>
+
                 <li class="header__item">
                     <a href="#" class="header__link">Login</a>
                 </li>
             </ul>
+
 
         </nav>
         <nav class="header__main-nav">
@@ -106,6 +124,11 @@
                 </a>
 
             </div>
+
+            <!-- Botón hamburguesa para móviles -->
+            <button class="header__menu-button" type="button" aria-label="Abrir menú">
+                <img src="img/zerotier-menu.png" alt="" class="header__menu-icon" aria-hidden="true">
+            </button>
 
         </nav>
     </header>
