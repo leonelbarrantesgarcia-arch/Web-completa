@@ -350,3 +350,44 @@ document.addEventListener("DOMContentLoaded", () => {
     track.replaceChildren(fragmento);
   });
 });
+
+/* -------- MENÚ LATERAL MÓVIL -------- */
+
+document.addEventListener("DOMContentLoaded", () => {
+  const botonAbrir = document.querySelector(".header__menu-button");
+  const menu = document.querySelector(".mobile-menu");
+  const botonCerrar = document.querySelector(".mobile-menu__close");
+  const fondoOscuro = document.querySelector(".mobile-menu__overlay");
+
+  if (!botonAbrir || !menu || !botonCerrar || !fondoOscuro) return;
+
+  // Abrir menú
+  function abrirMenu() {
+    menu.hidden = false;
+    botonAbrir.setAttribute("aria-expanded", "true");
+    botonCerrar.focus();
+  }
+
+  // Cerrar menú
+  function cerrarMenu() {
+    menu.hidden = true;
+    botonAbrir.setAttribute("aria-expanded", "false");
+    botonAbrir.focus();
+  }
+
+  // Abrir con el botón hamburguesa
+  botonAbrir.addEventListener("click", abrirMenu);
+
+  // Cerrar con la X
+  botonCerrar.addEventListener("click", cerrarMenu);
+
+  // Cerrar presionando el fondo oscuro
+  fondoOscuro.addEventListener("click", cerrarMenu);
+
+  // Cerrar presionando Escape
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && !menu.hidden) {
+      cerrarMenu();
+    }
+  });
+});

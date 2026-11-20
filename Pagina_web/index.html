@@ -126,12 +126,113 @@
             </div>
 
             <!-- Botón hamburguesa para móviles -->
-            <button class="header__menu-button" type="button" aria-label="Abrir menú">
+            <button class="header__menu-button" type="button" aria-label="Abrir menú" aria-controls="mobile-menu"
+                aria-expanded="false">
+
                 <img src="img/zerotier-menu.png" alt="" class="header__menu-icon" aria-hidden="true">
             </button>
 
+
         </nav>
     </header>
+    <!-- Menú lateral móvil -->
+    <div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Mobile Menu" hidden>
+
+        <!-- Fondo oscuro -->
+        <div class="mobile-menu__overlay"></div>
+
+        <!-- Panel lateral -->
+        <div class="mobile-menu__panel">
+
+            <div class="mobile-menu__content">
+
+                <!-- Botón cerrar -->
+                <button class="mobile-menu__close" type="button" aria-label="Cerrar menú">
+
+                    <svg aria-hidden="true" viewBox="0 0 352 512" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z" />
+                    </svg>
+
+                </button>
+
+                <!-- Navegación del menú móvil -->
+                <nav class="mobile-menu__nav" aria-label="Navegación móvil">
+                    <ul class="mobile-menu__list">
+                        <li class="mobile-menu__item">
+                            <button class="mobile-menu__nav-button" type="button">
+                                <span class="mobile-menu__nav-text">Platform</span>
+                                <span class="mobile-menu__nav-arrow" aria-hidden="true">
+                                    <img src="img/zerotier-arrow.png" alt="" class="mobile-menu__nav-arrow-icon">
+                                </span>
+                            </button>
+                        </li>
+
+                        <li class="mobile-menu__item">
+                            <button class="mobile-menu__nav-button" type="button">
+                                <span class="mobile-menu__nav-text">Industries</span>
+                                <span class="mobile-menu__nav-arrow" aria-hidden="true">
+                                    <img src="img/zerotier-arrow.png" alt="" class="mobile-menu__nav-arrow-icon">
+                                </span>
+                            </button>
+                        </li>
+
+                        <li class="mobile-menu__item">
+                            <button class="mobile-menu__nav-button" type="button">
+                                <span class="mobile-menu__nav-text">Insights</span>
+                                <span class="mobile-menu__nav-arrow" aria-hidden="true">
+                                    <img src="img/zerotier-arrow.png" alt="" class="mobile-menu__nav-arrow-icon">
+                                </span>
+                            </button>
+                        </li>
+
+                        <li class="mobile-menu__item">
+                            <button class="mobile-menu__nav-button" type="button">
+                                <span class="mobile-menu__nav-text">Product Resources</span>
+                                <span class="mobile-menu__nav-arrow" aria-hidden="true">
+                                    <img src="img/zerotier-arrow.png" alt="" class="mobile-menu__nav-arrow-icon">
+                                </span>
+                            </button>
+                        </li>
+
+                        <li class="mobile-menu__item">
+                            <a class="mobile-menu__nav-link" href="https://www.zerotier.com/about/">
+                                About ZeroTier
+                            </a>
+                        </li>
+
+                        <li class="mobile-menu__item">
+                            <a class="mobile-menu__nav-link" href="https://www.zerotier.com/pricing/">
+                                Pricing
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+
+                <!-- Botones del menú móvil -->
+                <div class="mobile-menu__actions">
+
+                    <a href="https://www.zerotier.com/connect-with-us/" class="header__contact mobile-menu__contact">
+
+                        <span class="material-symbols-outlined" aria-hidden="true">
+                            forum
+                        </span>
+                        Connect With Us
+                    </a>
+
+                    <a href="https://central.zerotier.com/" class="header__start mobile-menu__start">
+
+                        <span class="material-symbols-outlined" aria-hidden="true">
+                            rocket_launch
+                        </span>
+                        Start Free
+                    </a>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
     <main class="hero">
         <div class="hero__container">
             <div class="hero__slides">
