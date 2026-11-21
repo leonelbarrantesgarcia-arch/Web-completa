@@ -448,6 +448,8 @@ body {
     z-index: 0;
     overflow: hidden;
     pointer-events: none;
+    border-radius: 1.5rem;
+    clip-path: inset(0 round 1.5rem);
 }
 
 .featured__animation-position {
@@ -1254,6 +1256,10 @@ body {
     .featured__panel {
         padding: 1.5rem;
     }
+
+    .featured::before {
+        background-position: 0% 0;
+    }
 }
 
 /* -------- HERO RESPONSIVE -------- */
@@ -1325,6 +1331,10 @@ body {
         line-height: 1.8382rem;
     }
 
+    .card--blog .card__text {
+        display: none;
+    }
+
     .quantum__title {
         font-size: 1.414rem;
         line-height: 1.8382rem;
@@ -1367,6 +1377,10 @@ body {
         flex-basis: calc(33.3333cqw - 1rem);
         height: 3.125rem;
         margin-right: 1rem;
+    }
+
+    .featured::before {
+        background-position: 25% 0;
     }
 }
 
