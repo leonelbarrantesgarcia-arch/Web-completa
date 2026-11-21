@@ -305,10 +305,10 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1.625rem;
+    gap: 1.5rem;
     max-width: 80rem;
     margin: 0 auto;
-    padding: 4.625rem 0.75rem 15.002rem;
+    padding: 4.5rem 0.75rem 15rem;
 }
 
 .hero__title {
@@ -371,7 +371,7 @@ body {
 .hero__underline {
     position: relative;
     display: inline-block;
-    padding-bottom: 0;
+    padding-bottom: 0.125rem;
     background-image: linear-gradient(to right, #ffb25b, #ffb25b);
     background-repeat: no-repeat;
     background-position: 0% 100%;
@@ -1256,6 +1256,35 @@ body {
 @media (max-width: 52.125rem) {
     .featured__panel {
         padding: 1.5rem;
+    }
+}
+
+/* -------- HERO RESPONSIVE -------- */
+
+@media (max-width: 47.9375rem) {
+    .hero__container {
+        padding-inline: 1.5rem;
+        padding-top: 2.25rem;
+    }
+
+    .hero__title {
+        font-size: 2rem;
+        line-height: 2.6rem;
+    }
+
+    .hero__text {
+        width: calc(100% + 1.5rem);
+        font-size: 1rem;
+    }
+}
+
+@media (min-width: 48rem) {
+    .hero__container {
+        padding-inline: 9rem;
+    }
+
+    .hero__text {
+        width: calc(100% + 15rem);
     }
 }
 
