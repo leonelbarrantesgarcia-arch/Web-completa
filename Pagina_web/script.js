@@ -191,8 +191,19 @@ document.addEventListener("DOMContentLoaded", () => {
     getComputedStyle(document.documentElement).fontSize,
   );
 
-  let alturaOriginal = navbar.getBoundingClientRect().height;
-  let posicionOriginal = navbar.getBoundingClientRect().top + scrollY;
+  let alturaOriginal = 0;
+  let posicionOriginal = 0;
+
+  // Mide el navbar sin fijar (alto + margen superior)
+  function medirNavbar() {
+    navbar.classList.remove("is-fixed");
+    espacio.style.height = "0";
+
+    const margenSuperior = parseFloat(getComputedStyle(navbar).marginTop);
+
+    alturaOriginal = navbar.getBoundingClientRect().height + margenSuperior;
+    posicionOriginal = navbar.getBoundingClientRect().top + scrollY;
+  }
 
   function actualizarNavbar() {
     const fijar = scrollY >= posicionOriginal;
@@ -202,20 +213,20 @@ document.addEventListener("DOMContentLoaded", () => {
     espacio.style.height = fijar ? `${alturaOriginal / fuenteBase}rem` : "0";
   }
 
-  window.addEventListener("scroll", actualizarNavbar, {
-    passive: true,
-  });
+  window.addEventListener("scroll", actualizarNavbar, { passive: true });
 
   window.addEventListener("resize", () => {
-    navbar.classList.remove("is-fixed");
-    espacio.style.height = "0";
-
-    alturaOriginal = navbar.getBoundingClientRect().height;
-    posicionOriginal = navbar.getBoundingClientRect().top + scrollY;
-
+    medirNavbar();
     actualizarNavbar();
   });
 
+  // Al terminar de cargar (logo e íconos) se vuelve a medir
+  window.addEventListener("load", () => {
+    medirNavbar();
+    actualizarNavbar();
+  });
+
+  medirNavbar();
   actualizarNavbar();
 });
 
