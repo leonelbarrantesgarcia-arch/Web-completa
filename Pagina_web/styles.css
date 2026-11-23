@@ -1708,7 +1708,7 @@ body {
     background-color: rgba(210, 206, 238, 0);
     color: #637381;
     font-size: 1.5rem;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .accordion__item.is-active .accordion__icon {
@@ -1760,6 +1760,7 @@ body {
     border: 1px solid #d2ceee;
     border-radius: 0 0 8px 8px;
     background-color: #fff;
+    overflow: hidden;
 }
 
 .accordion__item.is-active .accordion__content {
@@ -1792,6 +1793,8 @@ body {
     scale: 1.6;
     opacity: 0.25;
     pointer-events: none;
+    transform: translateY(var(--benefits-parallax, 0rem));
+    transition: transform 0.1s;
 }
 
 /* Las 3 imágenes se apilan en la misma celda: la altura la marca la más alta */
@@ -1809,11 +1812,13 @@ body {
     height: auto;
     opacity: 0;
     visibility: hidden;
+    transition: opacity 1s linear 0.06s, visibility 0s linear 1.06s;
 }
 
 .benefits__slide.is-active {
     opacity: 1;
     visibility: visible;
+    transition: opacity 1s linear 0.06s, visibility 0s linear 0.06s;
 }
 
 @media (min-width: 48rem) and (max-width: 63.9375rem) {
