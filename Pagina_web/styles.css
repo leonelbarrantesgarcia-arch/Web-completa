@@ -1899,6 +1899,7 @@ body {
 .industries__heading {
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
 .industries__label-row {
@@ -1906,6 +1907,7 @@ body {
     align-items: center;
     justify-content: center;
     gap: 0.25rem;
+    width: 100%;
 }
 
 .industries__label {
@@ -1970,6 +1972,7 @@ body {
     box-shadow: 0 0.125rem 0.75rem 0 rgba(22, 28, 36, 0.5);
     text-decoration: none;
     cursor: pointer;
+    min-height: 0;
 }
 
 /* Capa oscura sobre la foto */
@@ -1996,13 +1999,14 @@ body {
 .industries__card-head {
     position: relative;
     display: flex;
+    flex-shrink: 0;
     align-items: center;
     gap: 0.25rem;
     height: 1.875rem;
 }
 
 .industries__card-title {
-    margin: 0;
+    margin: 0 0 0.5rem;
     color: #ffb441;
     font-size: 1.3125rem;
     font-weight: 700;
@@ -2010,9 +2014,11 @@ body {
 }
 
 .industries__card-arrow {
+    align-self: flex-start;
     color: #ffb441;
     font-size: 1.5rem;
     font-variation-settings: 'wght' 700;
+    transition: transform 0.5s ease;
 }
 
 .industries__card-text {
@@ -2042,13 +2048,12 @@ body {
     font-size: 1rem;
     font-weight: 700;
     line-height: 1;
-    transition: gap 0.5s;
     text-decoration: none;
+    transition: gap 0.5s;
 }
 
 .industries__more-link:hover {
     gap: 0.75rem;
-    text-decoration: none;
 }
 
 .industries__more-link .material-symbols-outlined {
@@ -2073,6 +2078,37 @@ body {
 
 .industries__card:hover .industries__card-arrow {
     transform: translateX(0.25rem);
+}
+
+/* ---------- INDUSTRIES: RESPONSIVE ---------- */
+@media (max-width: 47.9375rem) {
+    .industries {
+        margin-top: -6.75rem;
+        padding: 0;
+    }
+
+    .industries__container {
+        padding: 7.5rem 0 12rem;
+    }
+
+    .industries__label {
+        font-size: 1rem;
+    }
+
+    .industries__title {
+        font-size: 2rem;
+    }
+
+    .industries__cards {
+        flex-direction: column;
+        gap: 0.75rem;
+        padding: 0 0.75rem;
+    }
+
+    .industries__card {
+        flex: none;
+        width: 100%;
+    }
 }
 
 @media (min-width: 48rem) and (max-width: 63.9375rem) {
