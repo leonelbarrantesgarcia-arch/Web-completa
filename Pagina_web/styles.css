@@ -1821,6 +1821,53 @@ body {
     transition: opacity 1s linear 0.06s, visibility 0s linear 0.06s;
 }
 
+/* ---------- BENEFITS: RESPONSIVE ---------- */
+@media (max-width: 52.125rem) {
+    .benefits__row {
+        flex-direction: column-reverse;
+        gap: 0;
+    }
+
+    .benefits__content,
+    .benefits__media {
+        flex: none;
+    }
+
+    .benefits__bg {
+        scale: 1.2;
+    }
+}
+
+@media (max-width: 47.9375rem) {
+    .benefits {
+        padding: 0 0.75rem 3rem;
+    }
+
+    .benefits__row {
+        padding: 0;
+    }
+
+    .benefits__content {
+        padding: 0 0.75rem;
+    }
+
+    .benefits__label {
+        font-size: 1rem;
+    }
+
+    .benefits__arrow {
+        margin-top: 0.3125rem;
+    }
+
+    .benefits__title {
+        font-size: 2rem;
+    }
+
+    .benefits__bg {
+        scale: 1;
+    }
+}
+
 @media (min-width: 48rem) and (max-width: 63.9375rem) {
     .trusted__content {
         margin-inline: auto;
