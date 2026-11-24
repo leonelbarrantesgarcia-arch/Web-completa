@@ -454,3 +454,118 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+/* -------- PARALLAX DEL FONDO DE BENEFITS -------- */
+
+document.addEventListener("DOMContentLoaded", () => {
+  const seccion = document.querySelector(".benefits__media");
+  const fondo = document.querySelector(".benefits__bg");
+
+  if (!seccion || !fondo) return;
+
+  // Medido en ZeroTier: el fondo se mueve de -100px a +100px
+  const RECORRIDO = 100;
+  let pendiente = false;
+
+  function actualizarFondo() {
+    const rem = parseFloat(getComputedStyle(document.documentElement).fontSize);
+    const { top, height } = seccion.getBoundingClientRect();
+
+    // 0 = la sección empieza a entrar por abajo; 1 = termina de salir por arriba
+    const progreso = Math.min(
+      1,
+      Math.max(0, (innerHeight - top) / (innerHeight + height)),
+    );
+    const desplazamiento = -RECORRIDO + progreso * RECORRIDO * 2;
+
+    fondo.style.setProperty(
+      "--benefits-parallax",
+      `${desplazamiento / rem}rem`,
+    );
+    pendiente = false;
+  }
+
+  function pedirActualizacion() {
+    if (pendiente) return;
+    pendiente = true;
+    requestAnimationFrame(actualizarFondo);
+  }
+
+  window.addEventListener("scroll", pedirActualizacion, { passive: true });
+  window.addEventListener("resize", pedirActualizacion);
+  actualizarFondo();
+});
+
+/* -------- ACORDEÓN Y CAMBIO DE IMÁGENES DE BENEFITS -------- */
+
+document.addEventListener("DOMContentLoaded", () => {
+  const items = [...document.querySelectorAll(".accordion__item")];
+  const slides = [...document.querySelectorAll(".benefits__slide")];
+
+  if (!items.length || items.length !== slides.length) return;
+
+  // Medido en ZeroTier: el contenido se desliza en 400 ms con la curva "swing" de jQuery
+  const DURACION = 400;
+  const CURVA = "cubic-bezier(0.37, 0, 0.63, 1)";
+
+  const animaciones = new WeakMap();
+
+  // Desliza el contenido de un ítem hacia abajo (abrir) o hacia arriba (cerrar)
+  function deslizar(contenido, abrir) {
+    animaciones.get(contenido)?.cancel();
+
+    // Se muestra primero para poder medir su altura real
+    contenido.style.display = "block";
+    const { paddingTop, paddingBottom } = getComputedStyle(contenido);
+    const abierto = {
+      height: `${contenido.offsetHeight}px`,
+      paddingTop,
+      paddingBottom,
+    };
+    const cerrado = { height: "0px", paddingTop: "0px", paddingBottom: "0px" };
+
+    const animacion = contenido.animate(
+      abrir ? [cerrado, abierto] : [abierto, cerrado],
+      { duration: DURACION, easing: CURVA, fill: "forwards" },
+    );
+    animaciones.set(contenido, animacion);
+
+    animacion.onfinish = () => {
+      contenido.style.display = "";
+      animacion.cancel();
+      animaciones.delete(contenido);
+    };
+  }
+
+  function cambiarItem(nuevo) {
+    const actual = items.find((item) => item.classList.contains("is-active"));
+
+    // Clic en el ítem que ya está abierto: no hace nada (pendiente de confirmar)
+    if (nuevo === actual) return;
+
+    if (actual) {
+      actual.classList.remove("is-active");
+      actual
+        .querySelector(".accordion__trigger")
+        .setAttribute("aria-expanded", "false");
+      deslizar(actual.querySelector(".accordion__content"), false);
+    }
+
+    nuevo.classList.add("is-active");
+    nuevo
+      .querySelector(".accordion__trigger")
+      .setAttribute("aria-expanded", "true");
+    deslizar(nuevo.querySelector(".accordion__content"), true);
+
+    // La imagen que corresponde al ítem abierto (el fundido lo hace el CSS)
+    const posicion = items.indexOf(nuevo);
+    slides.forEach((imagen, i) =>
+      imagen.classList.toggle("is-active", i === posicion),
+    );
+  }
+
+  items.forEach((item) => {
+    item
+      .querySelector(".accordion__trigger")
+      .addEventListener("click", () => cambiarItem(item));
+  });
+});
