@@ -1821,6 +1821,296 @@ body {
     transition: opacity 1s linear 0.06s, visibility 0s linear 0.06s;
 }
 
+/* ---------- BENEFITS: RESPONSIVE ---------- */
+@media (max-width: 52.125rem) {
+    .benefits__row {
+        flex-direction: column-reverse;
+        gap: 0;
+    }
+
+    .benefits__content,
+    .benefits__media {
+        flex: none;
+    }
+
+    .benefits__bg {
+        scale: 1.2;
+    }
+}
+
+@media (max-width: 47.9375rem) {
+    .benefits {
+        padding: 0 0.75rem 3rem;
+    }
+
+    .benefits__row {
+        padding: 0;
+    }
+
+    .benefits__content {
+        padding: 0 0.75rem;
+    }
+
+    .benefits__label {
+        font-size: 1rem;
+    }
+
+    .benefits__arrow {
+        margin-top: 0.3125rem;
+    }
+
+    .benefits__title {
+        font-size: 2rem;
+    }
+
+    .benefits__bg {
+        scale: 1;
+    }
+}
+
+/* ---------- INDUSTRIES ---------- */
+.industries {
+    padding: 0 0.75rem;
+    overflow: hidden;
+    background-image: linear-gradient(#f4f6f8 0%, #fff 100%);
+}
+
+.industries__container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    max-width: 80rem;
+    margin: 0 auto;
+    padding: 1.5rem 0 12rem;
+}
+
+/* Encabezado */
+.industries__header {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 46.5rem;
+    margin: 0 auto;
+    padding: 0 0.75rem;
+}
+
+.industries__heading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.industries__label-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+    width: 100%;
+}
+
+.industries__label {
+    margin: 0 0 0.5rem;
+    color: #b3ade3;
+    font-size: 1.3125rem;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+.industries__arrow {
+    width: 1.125rem;
+    height: 1.5rem;
+    margin-top: 0.125rem;
+    color: #b3ade3;
+    font-size: 1.125rem;
+    font-weight: 400;
+    line-height: 1.125rem;
+    text-align: center;
+}
+
+.industries__title {
+    margin: 0;
+    color: #212b36;
+    font-size: 2.828rem;
+    font-weight: 700;
+    line-height: 1.3;
+    text-align: center;
+}
+
+.industries__text {
+    margin: 0 0 0.75rem;
+    color: #161c24;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    text-align: center;
+}
+
+/* Tarjetas */
+.industries__cards {
+    display: flex;
+    gap: 1.5rem;
+    padding: 1.5rem 0.75rem;
+}
+
+.industries__card {
+    position: relative;
+    display: flex;
+    flex: 1 1 0;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    box-sizing: border-box;
+    min-width: 0;
+    padding: 1.5rem;
+    aspect-ratio: 5 / 4;
+    border-radius: 16px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    box-shadow: 0 0.125rem 0.75rem 0 rgba(22, 28, 36, 0.5);
+    text-decoration: none;
+    cursor: pointer;
+    min-height: 0;
+}
+
+/* Capa oscura sobre la foto */
+.industries__card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background-image: linear-gradient(180deg, rgba(22, 28, 36, 0) 0%, #161c24 100%);
+}
+
+.industries__card--defense {
+    background-image: url("https://www.zerotier.com/wp-content/uploads/2026/04/Preview-Defense.jpg");
+}
+
+.industries__card--manufacturing {
+    background-image: url("https://www.zerotier.com/wp-content/uploads/2026/04/Preview-Manufacturing.jpg");
+}
+
+.industries__card--government {
+    background-image: url("https://www.zerotier.com/wp-content/uploads/2026/04/Preview-Government.jpg");
+}
+
+.industries__card-head {
+    position: relative;
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    gap: 0.25rem;
+    height: 1.875rem;
+}
+
+.industries__card-title {
+    margin: 0 0 0.5rem;
+    color: #ffb441;
+    font-size: 1.3125rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.industries__card-arrow {
+    align-self: flex-start;
+    color: #ffb441;
+    font-size: 1.5rem;
+    font-variation-settings: 'wght' 700;
+    transition: transform 0.5s ease;
+}
+
+.industries__card-text {
+    position: relative;
+    margin: 0;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+/* Botón */
+.industries__more {
+    display: flex;
+    justify-content: center;
+    margin-top: -1.5rem;
+    padding: 0 0.75rem;
+}
+
+.industries__more-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.75rem 0;
+    border-radius: 8px;
+    color: #ffb25b;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1;
+    text-decoration: none;
+    transition: gap 0.5s;
+}
+
+.industries__more-link:hover {
+    gap: 0.75rem;
+}
+
+.industries__more-link .material-symbols-outlined {
+    font-size: 1rem;
+    font-variation-settings: 'wght' 700;
+}
+
+/* Hover de las tarjetas */
+.industries__card {
+    transition: 0.5s;
+}
+
+.industries__card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0.5rem 1rem 0 rgba(22, 28, 36, 0.25);
+    text-decoration: none;
+}
+
+.industries__card-arrow {
+    transition: transform 0.5s ease;
+}
+
+.industries__card:hover .industries__card-arrow {
+    transform: translateX(0.25rem);
+}
+
+/* ---------- INDUSTRIES: RESPONSIVE ---------- */
+@media (max-width: 47.9375rem) {
+    .industries {
+        margin-top: -6.75rem;
+        padding: 0;
+    }
+
+    .industries__container {
+        padding: 7.5rem 0 12rem;
+    }
+
+    .industries__label {
+        font-size: 1rem;
+    }
+
+    .industries__title {
+        font-size: 2rem;
+    }
+
+    .industries__cards {
+        flex-direction: column;
+        gap: 0.75rem;
+        padding: 0 0.75rem;
+    }
+
+    .industries__card {
+        flex: none;
+        width: 100%;
+    }
+}
+
 @media (min-width: 48rem) and (max-width: 63.9375rem) {
     .trusted__content {
         margin-inline: auto;
