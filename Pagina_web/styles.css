@@ -2315,6 +2315,12 @@ body {
     animation: gradient 10s ease 0.25s infinite;
 }
 
+.footer__body {
+    position: relative;
+    padding: 0 0.75rem;
+    background-image: linear-gradient(#161c24 0%, rgba(22, 28, 36, 0.75) 100%);
+}
+
 /* Barra legal */
 .footer__bottom {
     display: flex;
@@ -2362,6 +2368,175 @@ body {
     padding-bottom: 0.125rem;
     color: #fff;
     font-weight: 500;
+}
+
+/* ---------- CTA (bloque morado) ---------- */
+.cta {
+    display: flow-root;
+    position: relative;
+    z-index: 2;
+    padding: 0 0.75rem;
+    background-color: #161c24;
+}
+
+/* El margen negativo sube la caja sobre la parte blanca */
+.cta__card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 60rem;
+    margin: -9rem auto 0;
+    padding: 1.5rem;
+    border-radius: 24px;
+    background-image: linear-gradient(135deg, #685bc7 0%, #463d85 100%);
+}
+
+.cta__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    width: 45rem;
+    max-width: 100%;
+    margin: 0.75rem;
+    padding: 3rem;
+}
+
+.cta__title {
+    margin: 0;
+    color: #fff;
+    font-size: 2.828rem;
+    font-weight: 700;
+    line-height: 1.3;
+    text-align: center;
+    text-wrap: balance;
+}
+
+.cta__text {
+    margin: 0 0 0.75rem;
+    color: #f4f6f8;
+    font-size: 1rem;
+    line-height: 1.5;
+    text-align: center;
+}
+
+.cta__actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    isolation: isolate;
+}
+
+.cta__start,
+.cta__contact {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: all 0.5s;
+}
+
+.cta__start {
+    padding: 0.75rem 0;
+}
+
+.cta__start:hover {
+    gap: 0.75rem;
+}
+
+.cta__actions .material-symbols-outlined {
+    width: 1rem;
+    height: 1rem;
+    overflow: hidden;
+    font-size: 1rem;
+    line-height: 1;
+    font-variation-settings: 'FILL' 1, 'wght' 400, 'opsz' 20;
+}
+
+.cta__contact {
+    position: relative;
+    padding: 0.75rem 1.25rem;
+    border: 3px solid transparent;
+    border-radius: 8px;
+    background:
+        linear-gradient(#212b36, #161c24) padding-box,
+        linear-gradient(150deg, #ffb25b, #685bc7) border-box;
+    box-shadow:
+        inset -0.03125rem -0.03125rem 0 0 rgba(210, 206, 238, 0.5),
+        inset 0.0625rem 0.0625rem 0 0 rgba(171, 119, 61, 0.25);
+    transform-style: preserve-3d;
+}
+
+/* Sombra y resplandor detrás del botón */
+.cta__contact::before,
+.cta__contact::after {
+    content: "";
+    position: absolute;
+    inset: 6% 2% -6%;
+    z-index: -1;
+    border-radius: 8px;
+    filter: blur(0.125rem);
+    transform: translateZ(-0.0625rem);
+    transition: all 0.5s;
+}
+
+.cta__contact::before {
+    background-image: linear-gradient(150deg, rgba(69, 79, 91, 0.75), rgba(33, 43, 54, 0.75));
+}
+
+.cta__contact::after {
+    background-image: linear-gradient(150deg, rgba(255, 178, 91, 0.5), rgba(104, 91, 199, 0.5));
+}
+
+.cta__contact:hover {
+    transform: translateY(-0.0625rem);
+}
+
+.cta__contact:hover::before,
+.cta__contact:hover::after {
+    inset: -2% 0 -12%;
+}
+
+/* Valor provisional del resplandor, falta medirlo */
+.cta__contact:hover::after {
+    filter: blur(0.5rem);
+}
+
+/* ---------- FOOTER: HOVER ---------- */
+.footer__link,
+.footer__legal-link,
+.footer__badge,
+.footer__certificate-link {
+    transition: color 0.3s, border-color 0.3s;
+}
+
+.footer__link:hover,
+.footer__legal-link:hover {
+    color: #ffb441;
+}
+
+.footer__certificate-link:hover {
+    color: #ffb25b;
+}
+
+.footer__badge:hover {
+    border-color: #b3ade3;
+    color: #ffb25b;
+}
+
+.footer__social-link svg {
+    transition: fill 0.25s;
+}
+
+.footer__social-link:hover svg {
+    fill: #ffb25b;
 }
 
 @media (min-width: 48rem) and (max-width: 63.9375rem) {
