@@ -2230,13 +2230,7 @@ body {
     transition: border 0.3s;
 }
 
-.footer__badge .material-symbols-outlined {
-    width: 1rem;
-    overflow: hidden;
-    font-size: 1rem;
-    line-height: 1;
-    font-variation-settings: 'FILL' 1, 'wght' 400, 'opsz' 20;
-}
+
 
 .footer__certificate-link {
     color: #c4cdd5;
@@ -2451,13 +2445,11 @@ body {
     gap: 0.75rem;
 }
 
-.cta__actions .material-symbols-outlined {
+.icon {
+    flex-shrink: 0;
     width: 1rem;
     height: 1rem;
-    overflow: hidden;
-    font-size: 1rem;
-    line-height: 1;
-    font-variation-settings: 'FILL' 1, 'wght' 400, 'opsz' 20;
+    fill: currentColor;
 }
 
 .cta__contact {
