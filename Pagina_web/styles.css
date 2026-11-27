@@ -1705,6 +1705,22 @@ body {
         padding-inline: 9rem;
     }
 
+    .hero__title--first {
+        position: relative;
+        top: 0.0625rem;
+    }
+
+    /* El cuarto título no necesita el 1px que baja a todo el carrusel */
+    .hero__title--fourth {
+        position: relative;
+        top: -0.0625rem;
+    }
+
+    .hero__slides {
+        position: relative;
+        top: 0.0625rem;
+    }
+
     .hero__text {
         width: calc(100% + 15rem);
     }
