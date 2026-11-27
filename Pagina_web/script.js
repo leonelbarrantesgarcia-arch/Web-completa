@@ -236,7 +236,7 @@ const hero = document.querySelector(".hero");
 
 if (hero) {
   // Medido en ZeroTier: cuánto sube el fondo por cada px de (scroll + alto de ventana)
-  const FACTOR = 0.057;
+  const FACTOR = 0.0407;
   let pendiente = false;
 
   function actualizarFondo() {

@@ -550,6 +550,21 @@ body {
     pointer-events: none;
 }
 
+/* El degradado va en la misma capa que la imagen, como en el original */
+@media (min-width: 48rem) {
+    .hero::before {
+        background-image:
+            linear-gradient(rgba(22, 28, 36, 0.67) 33%, rgb(22, 28, 36) 90%),
+            url("https://www.zerotier.com/wp-content/uploads/2026/04/Home-Hero-BG.jpg");
+        background-size: 100% 100%, cover;
+        background-position: 0% 0%, 50% 0%;
+    }
+
+    .hero::after {
+        display: none;
+    }
+}
+
 .hero__container {
     display: flex;
     flex-direction: column;
@@ -917,6 +932,13 @@ body {
     margin: 0;
     line-height: 1rem;
     min-height: 1.5rem;
+    align-items: flex-start;
+}
+
+.card__arrow {
+    margin-top: 0.125rem;
+    stroke: currentColor;
+    stroke-width: 10;
 }
 
 
@@ -995,6 +1017,7 @@ body {
     background: transparent;
     border: none;
     box-shadow: none;
+    isolation: isolate;
 }
 
 .quantum__title {
@@ -1012,7 +1035,6 @@ body {
 
 .quantum__button {
     position: relative;
-    z-index: 1;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -1028,6 +1050,7 @@ body {
     line-height: 1rem;
     text-decoration: none;
     white-space: nowrap;
+    transform-style: preserve-3d;
     transition: all 0.5s ease;
 }
 
@@ -1052,6 +1075,7 @@ body {
     z-index: -1;
     border-radius: inherit;
     pointer-events: none;
+    transform: translateZ(-0.0625rem);
     transition: all 0.5s ease;
 }
 
