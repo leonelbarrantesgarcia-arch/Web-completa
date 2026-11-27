@@ -17,9 +17,6 @@ body {
     font-variation-settings: 'FILL' 1, 'wght' 400, 'opsz' 20;
 }
 
-.header .header__search .material-symbols-outlined {
-    font-variation-settings: 'FILL' 1, 'wght' 700, 'opsz' 20;
-}
 
 .header {
     position: relative;
@@ -106,14 +103,11 @@ body {
     transition: all 0.3s ease;
 }
 
-.header__search span {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.header__search svg {
     width: 1.125rem;
     height: 1.5rem;
-    font-size: 1.25rem;
-    line-height: 1.5rem;
+    fill: currentColor;
+    transform: translateX(0.03125rem);
 }
 
 .header__search:hover {
@@ -204,6 +198,217 @@ body {
     background-color: rgb(81, 90, 100);
 }
 
+/* -------- MENÚS DESPLEGABLES -------- */
+
+.header__main-nav {
+    position: relative;
+    /* el panel se ubica respecto al navbar */
+}
+
+.dropdown {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    display: flex;
+    gap: 0.5rem;
+    width: calc(100% - 1.5rem);
+    max-width: 80rem;
+    padding: 0.5rem;
+    border-radius: 12px;
+    background-color: #f4f6f8;
+    box-shadow: 0 0.5rem 1rem 0 rgba(22, 28, 36, 0.5);
+    transform: translateX(-50%);
+    visibility: hidden;
+    opacity: 0;
+}
+
+/* Puente invisible: evita que se cierre al bajar el mouse del enlace al panel */
+.dropdown::before {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    width: 100%;
+    height: 1.125rem;
+}
+
+.header__main-item--menu:hover .dropdown,
+.header__main-item--menu:has(:focus-visible) .dropdown {
+    visibility: visible;
+    opacity: 1;
+    animation: dropdown-fade 0.5s ease;
+}
+
+@keyframes dropdown-fade {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.header__main-item--menu:hover>.header__main-link {
+    background-color: rgb(81, 90, 100);
+}
+
+.header__main-item--menu:hover>.header__main-link span {
+    transform: rotate(180deg);
+}
+
+.dropdown__column {
+    flex: 1 1 0;
+    min-width: 0;
+    padding: 1.5rem;
+    border: 1px solid #dfe3e8;
+    border-radius: 4px;
+    background-color: #fff;
+}
+
+.dropdown__column--wide {
+    flex: 0 0 calc((100% - 0.5rem) * 0.67);
+}
+
+.dropdown__title {
+    margin: 0;
+    color: #212b36;
+    font-size: 1.414rem;
+    font-weight: 700;
+    line-height: 1.838rem;
+}
+
+.dropdown__subtitle {
+    margin: 0 0 0.75rem;
+    color: #919eab;
+    font-size: 1rem;
+    line-height: 1.5rem;
+}
+
+.dropdown__list {
+    display: grid;
+    justify-items: start;
+    gap: 0.75rem 1.5rem;
+    margin: 0;
+    padding: 0.75rem 0 0;
+    border-top: 1px solid #dfe3e8;
+    list-style: none;
+}
+
+/* Industries: 12 enlaces en 2 columnas, se llenan de arriba hacia abajo */
+.dropdown--industries .dropdown__list {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(6, 1.5rem);
+    grid-auto-flow: column;
+}
+
+.dropdown__link {
+    display: flex;
+    gap: 0.5rem;
+    color: #454f5b;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.5rem;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.dropdown .material-symbols-outlined {
+    display: block;
+    width: 1rem;
+    overflow: hidden;
+    font-size: 1rem;
+    line-height: 1.5rem;
+}
+
+.dropdown__all {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 2rem;
+    padding: 0.75rem 0;
+    color: #ffb25b;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1rem;
+    text-decoration: none;
+}
+
+.dropdown__all .material-symbols-outlined {
+    line-height: 1rem;
+}
+
+.dropdown__card {
+    position: relative;
+    isolation: isolate;
+    display: flex;
+    flex: 1 1 0;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    min-width: 0;
+    padding: 1.5rem;
+    border-radius: 4px;
+    background-position: center;
+    background-size: cover;
+    box-shadow: 0 0.125rem 0.75rem 0 rgba(22, 28, 36, 0.5);
+}
+
+.dropdown--resources .dropdown__card {
+    flex: 0 0 calc((100% - 1rem) * 0.3145);
+}
+
+.dropdown__card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    background: linear-gradient(rgba(22, 28, 36, 0) 0%, #161c24 100%);
+}
+
+.dropdown__card--industries {
+    background-image: url("https://www.zerotier.com/wp-content/uploads/2026/01/Active-Security-Image-1-NOC-260113-DRAFT.jpg");
+}
+
+.dropdown__card--resources {
+    background-image: url("https://www.zerotier.com/wp-content/uploads/2026/06/SMCCTF-Customer-Story-Header-Image-260611v02-FINAL.jpg");
+}
+
+.dropdown__category {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    margin: 0 0 0.5rem;
+    color: #b3ade3;
+    font-size: 1rem;
+    line-height: 1.5rem;
+}
+
+.dropdown .dropdown__category .material-symbols-outlined {
+    width: 0.75rem;
+    font-size: 0.75rem;
+}
+
+.dropdown__card-title {
+    margin: 0 0 1.5rem;
+    color: #fff;
+    font-size: 1.414rem;
+    font-weight: 700;
+    line-height: 1.838rem;
+}
+
+.dropdown__more {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    color: #ffb441;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.5rem;
+    text-decoration: none;
+}
+
 /* -------- BOTONES DE ACCION -------- */
 
 .header__actions {
@@ -254,6 +459,51 @@ body {
     transition: all 0.5s ease;
 }
 
+/* Sombra y resplandor detrás del botón */
+.header__actions {
+    isolation: isolate;
+}
+
+.header__actions .header__contact {
+    position: relative;
+    transform-style: preserve-3d;
+}
+
+.header__actions .header__contact::before,
+.header__actions .header__contact::after {
+    content: "";
+    position: absolute;
+    inset: 0.149rem 0.355rem -0.149rem;
+    z-index: -1;
+    border-radius: 8px;
+    transform: translateZ(-0.0625rem);
+    transition: all 0.5s ease;
+    pointer-events: none;
+}
+
+.header__actions .header__contact::before {
+    background: linear-gradient(150deg, rgba(69, 79, 91, 0.75), rgba(33, 43, 54, 0.75));
+    filter: blur(0.125rem);
+}
+
+.header__actions .header__contact::after {
+    background: linear-gradient(150deg, rgba(255, 178, 91, 0.5), rgba(104, 91, 199, 0.5));
+    filter: blur(0.5rem);
+}
+
+.header__actions .header__contact:hover::before,
+.header__actions .header__contact:hover::after {
+    inset: -2% 0 -12%;
+}
+
+.header__actions .header__contact:hover::before {
+    filter: blur(0.25rem);
+}
+
+.header__actions .header__contact:hover::after {
+    filter: blur(0.5rem);
+}
+
 .header__contact:hover {
     transform: translateY(-0.0625rem);
 }
@@ -284,7 +534,6 @@ body {
     transform: translateY(var(--hero-parallax, -3rem));
     z-index: -2;
     pointer-events: none;
-    top: -8.808rem;
 }
 
 /* -------- DEGRADADO SOBRE LA IMAGEN -------- */
