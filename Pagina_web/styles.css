@@ -941,6 +941,20 @@ body {
     stroke-width: 10;
 }
 
+.icon.card__chevron {
+    position: relative;
+    top: 0.125rem;
+    width: 0.75rem;
+    height: 0.75rem;
+    stroke: currentColor;
+    stroke-width: 25;
+}
+
+.card--blog .card__more {
+    align-items: flex-start;
+    line-height: 1rem;
+    min-height: 1.5rem;
+}
 
 /* -------- INTERACCIÓN TARJETA PRESS RELEASE -------- */
 
