@@ -235,58 +235,26 @@ document.addEventListener("DOMContentLoaded", () => {
 const hero = document.querySelector(".hero");
 
 if (hero) {
-  // Mediciones reales obtenidas de ZeroTier
-  const muestras = [
-    { scroll: 0, desplazamiento: -48.0139 },
-    { scroll: 300, desplazamiento: -63.9006 },
-    { scroll: 600, desplazamiento: -81.5181 },
-    { scroll: 900, desplazamiento: -99.1783 },
-  ];
-
-  function calcularDesplazamiento(scroll) {
-    if (scroll <= 0) return muestras[0].desplazamiento;
-
-    for (let i = 1; i < muestras.length; i++) {
-      const anterior = muestras[i - 1];
-      const siguiente = muestras[i];
-
-      if (scroll <= siguiente.scroll) {
-        const progreso =
-          (scroll - anterior.scroll) / (siguiente.scroll - anterior.scroll);
-
-        return (
-          anterior.desplazamiento +
-          (siguiente.desplazamiento - anterior.desplazamiento) * progreso
-        );
-      }
-    }
-
-    return muestras[muestras.length - 1].desplazamiento;
-  }
-
+  // Medido en ZeroTier: cuánto sube el fondo por cada px de (scroll + alto de ventana)
+  const FACTOR = 0.057;
   let pendiente = false;
 
   function actualizarFondo() {
     const rem = parseFloat(getComputedStyle(document.documentElement).fontSize);
-
-    const desplazamiento = calcularDesplazamiento(scrollY);
+    const desplazamiento = -(scrollY + innerHeight) * FACTOR;
 
     hero.style.setProperty("--hero-parallax", `${desplazamiento / rem}rem`);
-
     pendiente = false;
   }
 
-  window.addEventListener(
-    "scroll",
-    () => {
-      if (pendiente) return;
+  function pedirActualizacion() {
+    if (pendiente) return;
+    pendiente = true;
+    requestAnimationFrame(actualizarFondo);
+  }
 
-      pendiente = true;
-      requestAnimationFrame(actualizarFondo);
-    },
-    { passive: true },
-  );
-
+  window.addEventListener("scroll", pedirActualizacion, { passive: true });
+  window.addEventListener("resize", pedirActualizacion);
   actualizarFondo();
 }
 
